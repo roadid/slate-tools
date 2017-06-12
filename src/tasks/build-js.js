@@ -7,7 +7,7 @@ const print = require('gulp-print');
 const mainBowerFiles = require('main-bower-files');
 const filter = require('gulp-filter');
 const flatten = require('gulp-flatten');
-
+const concat = require('gulp-concat');
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
 const utils = require('./includes/utilities.js');
@@ -22,22 +22,8 @@ function processThemeJs() {
 
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
-  return gulp.src(config.roots.vendorJs)
-    .pipe(plumber(utils.errorHandler))
-    .pipe(include())
-    .pipe(print())
-    .pipe(uglify({
-      mangle: true,
-      compress: true,
-      preserveComments: 'license',
-    }))
-    .pipe(gulp.dest(config.dist.assets));
-}
-
-function processBowerVendorJs() {
-  messages.logProcessFiles('build:bower-vendor-js');
   const jsFilter = filter('**/*.js', {restore: true});
-  return gulp.src(mainBowerFiles())
+  return gulp.src([config.roots.vendorJs, mainBowerFiles()])
     .pipe(jsFilter)
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
@@ -48,6 +34,7 @@ function processBowerVendorJs() {
       preserveComments: 'license',
     }))
     .pipe(flatten())
+    .pipe(concat('vendor.js'))
     .pipe(gulp.dest(config.dist.assets));
 }
 
@@ -65,7 +52,6 @@ gulp.task('watch:js', () => {
 
 gulp.task('build:vendor-js', () => {
   processVendorJs();
-  processBowerVendorJs();
 });
 
 gulp.task('watch:vendor-js', () => {
