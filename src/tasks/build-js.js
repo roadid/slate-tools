@@ -3,6 +3,7 @@ const uglify = require('gulp-uglify');
 const include = require('gulp-include');
 const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
+const print = require('gulp-print');
 const gnf = require('gulp-npm-files');
 
 const config = require('./includes/config.js');
@@ -22,6 +23,7 @@ function processVendorJs() {
   return gulp.src(gnf(), {base: './'})
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
+    .pipe(print())
     .pipe(uglify({
       mangle: true,
       compress: true,
