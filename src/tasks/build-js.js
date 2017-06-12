@@ -8,9 +8,12 @@ const mainBowerFiles = require('main-bower-files');
 const filter = require('gulp-filter');
 const flatten = require('gulp-flatten');
 const concat = require('gulp-concat');
+const merge2 = require('merge2');
+
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
 const utils = require('./includes/utilities.js');
+
 
 function processThemeJs() {
   messages.logProcessFiles('build:js');
@@ -23,8 +26,9 @@ function processThemeJs() {
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
   const jsFilter = filter('**/*.js', {restore: true});
-  return gulp.src([config.roots.vendorJs, mainBowerFiles()])
-    .pipe(jsFilter)
+  return merge2(gulp.src(config.roots.vendorJs)
+    , gulp.src(mainBowerFiles())
+      .pipe(jsFilter))
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
     .pipe(print())
