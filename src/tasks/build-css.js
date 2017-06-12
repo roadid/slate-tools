@@ -1,7 +1,10 @@
 const gulp = require('gulp');
 const cssimport = require('gulp-cssimport');
+const sass = require('gulp-sass');
+const filter = require('gulp-filter');
 const extReplace = require('gulp-ext-replace');
 const plumber = require('gulp-plumber');
+
 const chokidar = require('chokidar');
 
 const config = require('./includes/config.js');
@@ -17,9 +20,12 @@ const messages = require('./includes/messages.js');
  */
 function processCss() {
   messages.logProcessFiles('build:css');
-
+  const scssFilter = filter('**/*.scss', {restore: true});
   return gulp.src(config.roots.css)
     .pipe(plumber(utils.errorHandler))
+    .pipe(scssFilter)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(scssFilter.restore)
     .pipe(cssimport())
     .pipe(extReplace('.css.liquid', '.css'))
     .pipe(extReplace('.scss.liquid', '.scss'))
