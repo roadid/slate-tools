@@ -27,8 +27,6 @@ function processCss() {
     .pipe(sass().on('error', sass.logError))
     .pipe(scssFilter.restore)
     .pipe(cssimport())
-    .pipe(extReplace('.css.liquid', '.css'))
-    .pipe(extReplace('.scss.liquid', '.scss'))
     .pipe(gulp.dest(config.dist.assets));
 }
 
