@@ -30,10 +30,10 @@ function processAssets(files) {
   messages.logProcessFiles('build:assets');
   return gulp.src(files, {base: config.src.root})
     .pipe(plumber(utils.errorHandler))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }))
+    // .pipe(size({
+    //   showFiles: true,
+    //   pretty: true,
+    // }))
     .pipe(gulp.dest(config.dist.root));
 }
 
@@ -54,11 +54,11 @@ function removeAssets(files) {
 
   return gulp.src(mapFiles)
     .pipe(plumber(utils.errorHandler))
-    .pipe(vinylPaths(del))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }));
+    .pipe(vinylPaths(del));
+    // .pipe(size({
+    //   showFiles: true,
+    //   pretty: true,
+    // }));
 }
 
 /**

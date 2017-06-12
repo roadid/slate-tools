@@ -27,10 +27,10 @@ function processIcons(files) {
     .pipe(svgmin(config.plugins.svgmin))
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace('.liquid'))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }))
+    // .pipe(size({
+    //   showFiles: true,
+    //   pretty: true,
+    // }))
     .pipe(gulp.dest(config.dist.snippets));
 }
 

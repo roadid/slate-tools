@@ -12,10 +12,10 @@ function processConfig(file) {
 
   return gulp.src(file)
     .pipe(plumber(utils.errorHandler))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }))
+    // .pipe(size({
+    //   showFiles: true,
+    //   pretty: true,
+    // }))
     .pipe(gulp.dest(config.dist.root));
 }
 

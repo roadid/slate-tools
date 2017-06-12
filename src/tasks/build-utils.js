@@ -32,6 +32,6 @@ gulp.task('compress', () => {
   return gulp.src([distFiles, ignoreConfig])
     .pipe(plumber(utils.errorHandler))
     .pipe(zip(`${config.packageJson.name}.zip` || 'theme.zip'))
-    .pipe(size({showFiles: true, pretty: true}))
+    //.pipe(size({showFiles: true, pretty: true}))
     .pipe(gulp.dest('./upload/'));
 });

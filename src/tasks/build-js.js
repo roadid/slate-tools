@@ -31,7 +31,7 @@ function processVendorJs() {
       .pipe(jsFilter))
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
-    .pipe(print())
+    //.pipe(print())
     .pipe(uglify({
       mangle: true,
       compress: true,
