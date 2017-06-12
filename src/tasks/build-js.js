@@ -5,6 +5,7 @@ const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
 const print = require('gulp-print');
 const gnf = require('gulp-npm-files');
+const filter = require('gulp-filter');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -12,6 +13,9 @@ const utils = require('./includes/utilities.js');
 
 function processThemeJs() {
   messages.logProcessFiles('build:js');
+
+
+
   return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
@@ -20,7 +24,9 @@ function processThemeJs() {
 
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
+const jsFilter = filter('**/*.js', {restore: true});
   return gulp.src(gnf(), {base: './'})
+    .pipe(jsFilter)
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
     .pipe(print())
