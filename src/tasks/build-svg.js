@@ -52,11 +52,11 @@ function removeIcons(files) {
 
   return gulp.src(mapFiles)
     .pipe(plumber(utils.errorHandler))
-    .pipe(vinylPaths(del))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }));
+    .pipe(vinylPaths(del));
+    // .pipe(size({
+    //   showFiles: true,
+    //   pretty: true,
+    // }));
 }
 
 /**
