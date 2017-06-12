@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const cssimport = require('gulp-cssimport');
 const sass = require('gulp-sass');
 const filter = require('gulp-filter');
 const print = require('gulp-print');
@@ -32,7 +31,6 @@ function processCss() {
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
-    .pipe(cssimport())
     .pipe(gulp.dest(config.dist.assets));
 }
 
