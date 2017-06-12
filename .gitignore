@@ -49,5 +49,6 @@ bower_components
 .ruby-version
 bundle.js
 test/output
-lib/
+# removed lib so it is stored on github - Patrick
+# lib/
 .idea/
