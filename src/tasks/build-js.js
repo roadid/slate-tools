@@ -22,7 +22,7 @@ function processThemeJs() {
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
   const jsFilter = filter('**/*.js', {restore: true});
-  return gulp.src(mainBowerFiles(), {base: './'})
+  return gulp.src(mainBowerFiles())
     .pipe(jsFilter)
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
