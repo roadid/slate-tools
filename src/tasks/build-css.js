@@ -22,7 +22,7 @@ function processCss() {
   messages.logProcessFiles('build:css');
   const scssFilter = filter('**/*.scss', {restore: true});
   return gulp.src(config.roots.css)
-    .print(print((filepath) => {
+    .pipe(print((filepath) => {
       return `css: ${filepath}`;
     }))
     .pipe(plumber(utils.errorHandler))
