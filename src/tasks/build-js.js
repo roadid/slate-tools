@@ -3,7 +3,7 @@ const uglify = require('gulp-uglify');
 const include = require('gulp-include');
 const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
-var gnf = require('gulp-npm-files');
+const gnf = require('gulp-npm-files');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -19,7 +19,7 @@ function processThemeJs() {
 
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
-  return gulp.src(gnf(), {base:'./'})
+  return gulp.src(gnf(), {base: './'})
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
     .pipe(uglify({
