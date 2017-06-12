@@ -8,6 +8,7 @@ const filter = require('gulp-filter');
 const flatten = require('gulp-flatten');
 const concat = require('gulp-concat');
 const merge2 = require('merge2');
+const sourcemaps = require('gulp-sourcemaps');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -28,6 +29,7 @@ function processVendorJs() {
   return merge2(gulp.src(config.roots.vendorJs)
     , gulp.src(mainBowerFiles())
       .pipe(jsFilter))
+    .pipe(sourcemaps.init())
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
     .pipe(uglify({
@@ -37,6 +39,7 @@ function processVendorJs() {
     }))
     .pipe(flatten())
     .pipe(concat('vendor.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dist.assets));
 }
 
