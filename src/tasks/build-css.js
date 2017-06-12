@@ -4,6 +4,7 @@ const sass = require('gulp-sass');
 const filter = require('gulp-filter');
 const print = require('gulp-print');
 const plumber = require('gulp-plumber');
+const sourcemaps = require('gulp-sourcemaps');
 
 const chokidar = require('chokidar');
 
@@ -27,7 +28,9 @@ function processCss() {
     }))
     .pipe(plumber(utils.errorHandler))
     .pipe(scssFilter)
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
     .pipe(cssimport())
     .pipe(gulp.dest(config.dist.assets));
