@@ -21,6 +21,20 @@ function processThemeJs() {
 
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
+  return gulp.src(config.roots.vendorJs)
+    .pipe(plumber(utils.errorHandler))
+    .pipe(include())
+    .pipe(print())
+    .pipe(uglify({
+      mangle: true,
+      compress: true,
+      preserveComments: 'license',
+    }))
+    .pipe(gulp.dest(config.dist.assets));
+}
+
+function processBowerVendorJs() {
+  messages.logProcessFiles('build:bower-vendor-js');
   const jsFilter = filter('**/*.js', {restore: true});
   return gulp.src(mainBowerFiles())
     .pipe(jsFilter)
@@ -49,6 +63,7 @@ gulp.task('watch:js', () => {
 
 gulp.task('build:vendor-js', () => {
   processVendorJs();
+  processBowerVendorJs();
 });
 
 gulp.task('watch:vendor-js', () => {
