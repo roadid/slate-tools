@@ -13,9 +13,6 @@ const utils = require('./includes/utilities.js');
 
 function processThemeJs() {
   messages.logProcessFiles('build:js');
-
-
-
   return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
@@ -24,7 +21,7 @@ function processThemeJs() {
 
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
-const jsFilter = filter('**/*.js', {restore: true});
+  const jsFilter = filter('**/*.js', {restore: true});
   return gulp.src(gnf(), {base: './'})
     .pipe(jsFilter)
     .pipe(plumber(utils.errorHandler))
