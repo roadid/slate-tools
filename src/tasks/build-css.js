@@ -23,7 +23,9 @@ function processCss() {
   messages.logProcessFiles('build:css');
   const scssFilter = filter('**/*.scss', {restore: true});
   return gulp.src(config.roots.css)
-    .print(print())
+    .print(print((filepath) => {
+      return 'css: ' + filepath;
+    }))
     .pipe(plumber(utils.errorHandler))
     .pipe(scssFilter)
     .pipe(sass().on('error', sass.logError))
