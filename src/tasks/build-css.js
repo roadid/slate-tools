@@ -3,7 +3,6 @@ const cssimport = require('gulp-cssimport');
 const sass = require('gulp-sass');
 const filter = require('gulp-filter');
 const print = require('gulp-print');
-const extReplace = require('gulp-ext-replace');
 const plumber = require('gulp-plumber');
 
 const chokidar = require('chokidar');
@@ -24,7 +23,7 @@ function processCss() {
   const scssFilter = filter('**/*.scss', {restore: true});
   return gulp.src(config.roots.css)
     .print(print((filepath) => {
-      return 'css: ' + filepath;
+      return `css: ${filepath}`;
     }))
     .pipe(plumber(utils.errorHandler))
     .pipe(scssFilter)

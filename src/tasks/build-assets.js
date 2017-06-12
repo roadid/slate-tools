@@ -3,7 +3,6 @@ const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
 const vinylPaths = require('vinyl-paths');
 const del = require('del');
-const size = require('gulp-size');
 
 const config = require('./includes/config.js');
 const utils = require('./includes/utilities.js');
@@ -30,10 +29,6 @@ function processAssets(files) {
   messages.logProcessFiles('build:assets');
   return gulp.src(files, {base: config.src.root})
     .pipe(plumber(utils.errorHandler))
-    // .pipe(size({
-    //   showFiles: true,
-    //   pretty: true,
-    // }))
     .pipe(gulp.dest(config.dist.root));
 }
 
@@ -55,10 +50,6 @@ function removeAssets(files) {
   return gulp.src(mapFiles)
     .pipe(plumber(utils.errorHandler))
     .pipe(vinylPaths(del));
-    // .pipe(size({
-    //   showFiles: true,
-    //   pretty: true,
-    // }));
 }
 
 /**

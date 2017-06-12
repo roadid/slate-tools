@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const vinylPaths = require('vinyl-paths');
 const del = require('del');
-const size = require('gulp-size');
 const chokidar = require('chokidar');
 const svgmin = require('gulp-svgmin');
 const cheerio = require('gulp-cheerio');
@@ -27,10 +26,6 @@ function processIcons(files) {
     .pipe(svgmin(config.plugins.svgmin))
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace('.liquid'))
-    // .pipe(size({
-    //   showFiles: true,
-    //   pretty: true,
-    // }))
     .pipe(gulp.dest(config.dist.snippets));
 }
 
@@ -53,10 +48,6 @@ function removeIcons(files) {
   return gulp.src(mapFiles)
     .pipe(plumber(utils.errorHandler))
     .pipe(vinylPaths(del));
-    // .pipe(size({
-    //   showFiles: true,
-    //   pretty: true,
-    // }));
 }
 
 /**

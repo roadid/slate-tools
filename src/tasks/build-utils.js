@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const del = require('del');
 const zip = require('gulp-zip');
-const size = require('gulp-size');
 const plumber = require('gulp-plumber');
 
 const config = require('./includes/config.js');
@@ -32,6 +31,5 @@ gulp.task('compress', () => {
   return gulp.src([distFiles, ignoreConfig])
     .pipe(plumber(utils.errorHandler))
     .pipe(zip(`${config.packageJson.name}.zip` || 'theme.zip'))
-    //.pipe(size({showFiles: true, pretty: true}))
     .pipe(gulp.dest('./upload/'));
 });

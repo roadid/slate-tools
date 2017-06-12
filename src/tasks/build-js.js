@@ -3,7 +3,6 @@ const uglify = require('gulp-uglify');
 const include = require('gulp-include');
 const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
-const print = require('gulp-print');
 const mainBowerFiles = require('main-bower-files');
 const filter = require('gulp-filter');
 const flatten = require('gulp-flatten');
@@ -31,7 +30,6 @@ function processVendorJs() {
       .pipe(jsFilter))
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
-    //.pipe(print())
     .pipe(uglify({
       mangle: true,
       compress: true,
