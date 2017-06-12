@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const cssimport = require('gulp-cssimport');
 const sass = require('gulp-sass');
 const filter = require('gulp-filter');
+const print = require('gulp-print');
 const extReplace = require('gulp-ext-replace');
 const plumber = require('gulp-plumber');
 
@@ -22,6 +23,7 @@ function processCss() {
   messages.logProcessFiles('build:css');
   const scssFilter = filter('**/*.scss', {restore: true});
   return gulp.src(config.roots.css)
+    .print(print())
     .pipe(plumber(utils.errorHandler))
     .pipe(scssFilter)
     .pipe(sass().on('error', sass.logError))
