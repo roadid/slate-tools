@@ -6,6 +6,7 @@ const chokidar = require('chokidar');
 const print = require('gulp-print');
 const mainBowerFiles = require('main-bower-files');
 const filter = require('gulp-filter');
+const flatten = require('gulp-flatten');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -46,6 +47,7 @@ function processBowerVendorJs() {
       compress: true,
       preserveComments: 'license',
     }))
+    .pipe(flatten())
     .pipe(gulp.dest(config.dist.assets));
 }
 
