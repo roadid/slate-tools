@@ -4,7 +4,7 @@ const include = require('gulp-include');
 const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
 const print = require('gulp-print');
-const gnf = require('gulp-npm-files');
+const mainBowerFiles = require('main-bower-files');
 const filter = require('gulp-filter');
 
 const config = require('./includes/config.js');
@@ -22,7 +22,7 @@ function processThemeJs() {
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
   const jsFilter = filter('**/*.js', {restore: true});
-  return gulp.src(gnf(), {base: './'})
+  return gulp.src(mainBowerFiles(), {base: './'})
     .pipe(jsFilter)
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
