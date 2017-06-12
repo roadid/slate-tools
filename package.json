@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.3.19",
+  "version": "0.3.20",
   "description": "Tooling for Shopify themes",
   "main": "lib/gulpfile.js",
   "license": "MIT",
