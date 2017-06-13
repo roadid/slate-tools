@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.3.26",
+  "version": "0.3.27",
   "description": "Tooling for Shopify themes",
   "main": "lib/gulpfile.js",
   "license": "MIT",
@@ -23,6 +23,7 @@
     "gulp-flatten": "^0.3.1",
     "gulp-include": "2.3.1",
     "gulp-plumber": "1.1.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-print": "^2.0.1",
     "gulp-sass": "^3.1.0",
     "gulp-sass-glob": "^1.0.8",
@@ -37,6 +38,7 @@
     "main-bower-files": "^2.13.1",
     "merge2": "^1.0.3",
     "open": "0.0.5",
+    "postcss-flexbugs-fixes": "^3.0.0",
     "require-dir": "0.3.1",
     "run-sequence": "1.2.2",
     "vinyl-paths": "2.1.0",

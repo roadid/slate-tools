@@ -4,7 +4,8 @@ const sassGlob = require('gulp-sass-glob');
 const filter = require('gulp-filter');
 const plumber = require('gulp-plumber');
 const sourcemaps = require('gulp-sourcemaps');
-
+const postcss = require('gulp-postcss');
+const postcssFlexbugs = require('postcss-flexbugs-fixes');
 const chokidar = require('chokidar');
 
 const config = require('./includes/config.js');
@@ -27,6 +28,7 @@ function processCss() {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
+    .pipe(postcss([postcssFlexbugs]))
     .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
     .pipe(gulp.dest(config.dist.assets));
