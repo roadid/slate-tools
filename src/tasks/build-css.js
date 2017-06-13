@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
+const sassGlob = require('gulp-sass-glob');
 const filter = require('gulp-filter');
-const print = require('gulp-print');
 const plumber = require('gulp-plumber');
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -22,13 +22,11 @@ function processCss() {
   messages.logProcessFiles('build:css');
   const scssFilter = filter('**/*.scss', {restore: true});
   return gulp.src(config.roots.css)
-    .pipe(print((filepath) => {
-      return `css: ${filepath}`;
-    }))
     .pipe(plumber(utils.errorHandler))
     .pipe(scssFilter)
     .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sassGlob())
+    .pipe(sass({outputStyle: 'compressed'}))
     .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
     .pipe(gulp.dest(config.dist.assets));
