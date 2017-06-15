@@ -23,7 +23,7 @@ function processThemeTs() {
 
   return tsResult.js
     .pipe(browserify({
-      insertGlobals: true,
+      insertGlobals: false,
     }))
     .pipe(gulp.dest(config.dist.assets));
 }
