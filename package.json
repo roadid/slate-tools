@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.3.35",
+  "version": "0.3.36",
   "description": "Tooling for Shopify themes",
   "main": "lib/gulpfile.js",
   "license": "MIT",
@@ -17,7 +17,6 @@
     "del": "2.2.2",
     "find-root": "1.0.0",
     "gulp": "3.9.1",
-    "gulp-browserify": "^0.5.1",
     "gulp-cheerio": "0.6.2",
     "gulp-concat": "^2.6.1",
     "gulp-ext-replace": "0.3.0",
