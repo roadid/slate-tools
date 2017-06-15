@@ -15,7 +15,7 @@ function processThemeTs() {
   // pull in the project TypeScript config
   const tsProject = ts.createProject('tsconfig.json');
 
-  var tsResult = gulp.src([config.roots.js])
+  const tsResult = gulp.src([config.roots.js])
     .pipe(plumber(utils.errorHandler))
     .pipe(tslint({formatter: 'verbose'}))
     .pipe(tslint.report())
@@ -25,13 +25,13 @@ function processThemeTs() {
 }
 
 gulp.task('build:ts', () => {
-    processThemeTs();
+  processThemeTs();
 });
 
 gulp.task('watch:ts', () => {
   chokidar.watch([config.src.ts], {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
-        processThemeTs();
+      processThemeTs();
     });
 });
