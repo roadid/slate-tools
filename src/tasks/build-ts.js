@@ -3,7 +3,7 @@ const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
 const ts = require('gulp-typescript');
 const tslint = require('gulp-tslint');
-
+const browserify = require('gulp-browserify');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -21,7 +21,11 @@ function processThemeTs() {
     .pipe(tslint.report())
     .pipe(tsProject());
 
-  return tsResult.js.pipe(gulp.dest(config.dist.assets));
+  return tsResult.js
+    .pipe(browserify({
+      insertGlobals: true,
+    }))
+    .pipe(gulp.dest(config.dist.assets));
 }
 
 gulp.task('build:ts', () => {
