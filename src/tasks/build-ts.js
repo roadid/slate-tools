@@ -15,7 +15,7 @@ function processThemeTs() {
   // pull in the project TypeScript config
   const tsProject = ts.createProject('tsconfig.json');
 
-  const tsResult = gulp.src([config.roots.js])
+  const tsResult = gulp.src([config.roots.ts])
     .pipe(plumber(utils.errorHandler))
     .pipe(tslint({formatter: 'verbose'}))
     .pipe(tslint.report())
