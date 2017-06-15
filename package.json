@@ -59,7 +59,8 @@
     "del-cli": "^1.0.0",
     "eslint": "3.10.2",
     "eslint-plugin-node": "3.0.4",
-    "eslint-plugin-shopify": "15.1.0"
+    "eslint-plugin-shopify": "15.1.0",
+    "gulp-babel": "^6.1.2"
   },
   "scripts": {
     "clean": "del-cli lib/",
