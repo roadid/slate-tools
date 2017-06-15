@@ -88,6 +88,7 @@ gulp.task('watch:src', [
   'watch:config',
   'watch:svg',
   'watch:css',
+  'watch:ts',
   'watch:js',
   'watch:vendor-js',
 ]);
