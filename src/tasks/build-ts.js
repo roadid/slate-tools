@@ -15,11 +15,14 @@ function processThemeTs() {
   // pull in the project TypeScript config
   const tsProject = ts.createProject('tsconfig.json');
 
-  return gulp.src([config.roots.ts])
+
+  const tsResult = gulp.src([config.roots.ts])
     .pipe(plumber(utils.errorHandler))
     .pipe(tslint({formatter: 'verbose'}))
     .pipe(tslint.report())
-    .pipe(tsProject())
+    .pipe(tsProject());
+
+  return tsResult.js
     .pipe(babel())
     .pipe(gulp.dest(config.dist.assets));
 }
