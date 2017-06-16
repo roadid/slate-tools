@@ -19,7 +19,7 @@ function processThemeTs() {
     .pipe(plumber(utils.errorHandler))
     .pipe(tslint({formatter: 'verbose'}))
     .pipe(tslint.report())
-    .pipe(ts(tsProject))
+    .pipe(tsProject())
     .pipe(babel())
     .pipe(gulp.dest(config.dist.assets));
 }
