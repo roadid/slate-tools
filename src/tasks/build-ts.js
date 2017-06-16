@@ -3,6 +3,7 @@ const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
 const ts = require('gulp-typescript');
 const tslint = require('gulp-tslint');
+const babel = require('gulp-babel');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -14,13 +15,14 @@ function processThemeTs() {
   // pull in the project TypeScript config
   const tsProject = ts.createProject('tsconfig.json');
 
-  const tsResult = gulp.src([config.roots.ts])
+  return gulp.src([config.roots.ts])
     .pipe(plumber(utils.errorHandler))
     .pipe(tslint({formatter: 'verbose'}))
     .pipe(tslint.report())
-    .pipe(tsProject());
-
-  return tsResult.js
+    .pipe(ts(tsProject))
+    .pipe(babel({
+      optional: ['runtime'],
+    }))
     .pipe(gulp.dest(config.dist.assets));
 }
 
