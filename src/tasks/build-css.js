@@ -7,6 +7,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const postcssFlexbugs = require('postcss-flexbugs-fixes');
 const chokidar = require('chokidar');
+const mainBowerFiles = require('main-bower-files');
+const concat = require('gulp-concat');
 
 const config = require('./includes/config.js');
 const utils = require('./includes/utilities.js');
@@ -34,6 +36,18 @@ function processCss() {
     .pipe(gulp.dest(config.dist.assets));
 }
 
+function processVendorCss() {
+  messages.logProcessFiles('build:vendor-css');
+  const cssFilter = filter('**/*.css', {restore: true});
+  return gulp.src(mainBowerFiles())
+    .pipe(cssFilter)
+    .pipe(sourcemaps.init())
+    .pipe(plumber(utils.errorHandler))
+    .pipe(concat('vendor.css'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(config.dist.assets));
+}
+
 /**
  * Concatenate css via gulp-cssimport
  *
@@ -58,4 +72,8 @@ gulp.task('watch:css', () => {
       messages.logFileEvent(event, path);
       processCss();
     });
+});
+
+gulp.task('build:vendor-css', () => {
+  processVendorCss();
 });

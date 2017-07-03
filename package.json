@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.3.41",
+  "version": "0.3.43",
   "description": "Tooling for Shopify themes",
   "main": "lib/gulpfile.js",
   "license": "MIT",
@@ -53,11 +53,11 @@
     "yargs": "6.4.0"
   },
   "devDependencies": {
-    "babel-cli": "6.18.0",
-    "babel-core": "6.18.2",
-    "babel-plugin-add-shopify-header": "1.0.6",
-    "babel-preset-shopify": "15.0.1",
-    "babel-register": "6.18.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-plugin-add-shopify-header": "^1.0.6",
+    "babel-preset-shopify": "^16.1.0",
+    "babel-register": "^6.24.1",
     "del-cli": "^1.0.0",
     "eslint": "3.10.2",
     "eslint-plugin-node": "3.0.4",

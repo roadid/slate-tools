@@ -3,8 +3,6 @@ const plumber = require('gulp-plumber');
 const chokidar = require('chokidar');
 const ts = require('gulp-typescript');
 const tslint = require('gulp-tslint');
-const webpackStream = require('webpack-stream');
-const webpack2 = require('webpack');
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
 const utils = require('./includes/utilities.js');
@@ -23,7 +21,6 @@ function processThemeTs() {
     .pipe(tsProject());
 
   return tsResult.js
-    .pipe(webpackStream({}, webpack2))
     .pipe(gulp.dest(config.dist.assets));
 }
 
