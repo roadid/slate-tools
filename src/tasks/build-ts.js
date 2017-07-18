@@ -9,8 +9,9 @@ const plumber = require('gulp-plumber');
 const ts = require('gulp-typescript');
 const tslint = require('gulp-tslint');
 const utils = require('./includes/utilities.js');
-const config = require('./includes/config.js');
 */
+const config = require('./includes/config.js');
+
 
 const messages = require('./includes/messages.js');
 
@@ -44,16 +45,13 @@ function processThemeTs() {
 
 function processTestJs() {
   messages.logProcessFiles('build:ts');
+  const configFile = `${config.themeRoot}/webpack.config.js`;
   return gulp.src('src/scripts_webpack/test123.js')
     .pipe(size({
       showFiles: true,
       pretty: true,
     }))
-    .pipe(webpack({
-      output: {
-        filename: 'testABC.js',
-      },
-    }))
+    .pipe(webpack(require(configFile)))
     .pipe(gulp.dest('dist/assets'));
 }
 

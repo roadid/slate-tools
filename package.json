@@ -31,7 +31,6 @@
     "gulp-size": "2.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-svgmin": "1.2.3",
-    "gulp-tslint": "^8.1.1",
     "gulp-typescript": "^3.1.7",
     "gulp-uglify": "2.0.0",
     "gulp-util": "3.0.7",
