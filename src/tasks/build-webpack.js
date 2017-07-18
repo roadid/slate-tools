@@ -43,10 +43,10 @@ function processThemeTs() {
 */
 
 
-function processTestJs() {
-  messages.logProcessFiles('build:ts');
+function processWebpackJs() {
+  messages.logProcessFiles('build:webpack');
   const configFile = `${config.themeRoot}/webpack.config.js`;
-  return gulp.src('src/scripts_webpack/test123.js')
+  return gulp.src(config.src.webpack)
     .pipe(size({
       showFiles: true,
       pretty: true,
@@ -54,19 +54,15 @@ function processTestJs() {
     .pipe(webpack(require(configFile)))
     .pipe(gulp.dest('dist/assets'));
 }
-
-gulp.task('build:ts', () => {
-  // processThemeTs();
-  processTestJs();
+gulp.task('build:webpack', () => {
+  processWebpackJs();
 });
 
-gulp.task('watch:ts', () => {
-  // chokidar.watch([config.src.ts], {ignoreInitial: true})
-  chokidar.watch(['src/scripts_webpack/test123.js'], {ignoreInitial: true})
+gulp.task('watch:webpack', () => {
+  chokidar.watch([config.src.webpack], {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
-      // processThemeTs();
-      processTestJs();
+      processWebpackJs();
     });
 });
 
