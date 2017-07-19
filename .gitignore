@@ -50,5 +50,5 @@ bower_components
 bundle.js
 test/output
 # removed lib so it is stored on github - Patrick
-lib/*
+lib/
 .idea/
