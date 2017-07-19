@@ -2,6 +2,7 @@ const gutil = require('gulp-util');
 const _ = require('lodash');
 const Promise = require('bluebird');
 
+
 let errors = [];
 
 /**
@@ -45,6 +46,20 @@ const utilities = {
     errors.push(err);
 
     this.emit('end');
+  },
+
+    /**
+     * Generic error handler for streams called in `watch` tasks (used by gulp-plumber).
+     * Any error that is thrown inside of a task is added to the errors array.
+     *
+     * BUT Emit End is not called and watch keeps going.
+     * @memberof slate-cli.utilities
+     * @param {Error} err
+     */
+  errorHandlerButContinue: (err) => {
+    gutil.log(gutil.colors.red(err));
+    errors.push(err);
+
   },
 
   /**
