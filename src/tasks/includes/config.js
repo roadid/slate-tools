@@ -50,7 +50,7 @@ const config = {
     root: 'src/',
     js: 'src/scripts/**/*.{js,js.liquid}',
     ts: 'src/scripts/**/*.{ts,tsx}',
-    webpack: 'src/scripts_webpack/**/*.{js,ts,tsx}',
+    webpack: 'src/scripts_webpack/**/*.{js,ts,tsx,vue,css,scss}',
     vendorJs: 'src/scripts/vendor/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{css,scss,scss.liquid}',
