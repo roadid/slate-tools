@@ -6,6 +6,7 @@ const plumber = require('gulp-plumber');
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const postcssFlexbugs = require('postcss-flexbugs-fixes');
+const autoprefixer = require('autoprefixer');
 const chokidar = require('chokidar');
 const mainBowerFiles = require('main-bower-files');
 const concat = require('gulp-concat');
@@ -30,7 +31,7 @@ function processCss() {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
-    .pipe(postcss([postcssFlexbugs]))
+    .pipe(postcss([postcssFlexbugs, autoprefixer()]))
     .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
     .pipe(gulp.dest(config.dist.assets));
