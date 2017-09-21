@@ -18,8 +18,8 @@ const utils = require('./includes/utilities.js');
 function processThemeJs() {
   messages.logProcessFiles('build:js');
   return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
-    .pipe(plumber(utils.errorHandler))
     .pipe(sourcemaps.init())
+    .pipe(plumber(utils.errorHandler))
     .pipe(include())
     .pipe(uglify({
       mangle: true,
