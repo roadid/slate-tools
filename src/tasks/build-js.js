@@ -20,6 +20,11 @@ function processThemeJs() {
   return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
+    .pipe(uglify({
+      mangle: true,
+      compress: true,
+      preserveComments: 'license',
+    }))
     .pipe(gulp.dest(config.dist.assets));
 }
 
