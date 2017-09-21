@@ -9,6 +9,7 @@ const flatten = require('gulp-flatten');
 const concat = require('gulp-concat');
 const merge2 = require('merge2');
 const sourcemaps = require('gulp-sourcemaps');
+const ngAnnotate = require('gulp-ng-annotate');
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -21,6 +22,7 @@ function processThemeJs() {
     .pipe(sourcemaps.init())
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
+    .pipe(ngAnnotate())
     .pipe(uglify({
       mangle: true,
       compress: true,
