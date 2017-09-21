@@ -19,12 +19,14 @@ function processThemeJs() {
   messages.logProcessFiles('build:js');
   return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
     .pipe(plumber(utils.errorHandler))
+    .pipe(sourcemaps.init())
     .pipe(include())
     .pipe(uglify({
       mangle: true,
       compress: true,
       preserveComments: 'license',
     }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dist.assets));
 }
 
