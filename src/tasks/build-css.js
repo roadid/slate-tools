@@ -26,6 +26,7 @@ const messages = require('./includes/messages.js');
 function processCss() {
   messages.logProcessFiles('build:css');
   const scssFilter = filter('**/*.scss', {restore: true});
+  const themeFilter = filter('**/theme.css', {restore: true});
   return gulp.src(config.roots.css)
     .pipe(plumber(utils.errorHandler))
     .pipe(scssFilter)
@@ -33,7 +34,8 @@ function processCss() {
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(postcss([postcssFlexbugs, autoprefixer()]))
-    // Put a copy in snippets
+    // Put a copy of theme in snippets
+    .pipe(themeFilter)
     .pipe(rename( (path) => {
       path.extname = '.liquid';
     }))
@@ -41,6 +43,7 @@ function processCss() {
     .pipe(rename( (path) => {
       path.extname = '.css';
     }))
+    .pipe(themeFilter.restore)
     // Write out to assets
     .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
