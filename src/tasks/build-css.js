@@ -10,6 +10,7 @@ const autoprefixer = require('autoprefixer');
 const chokidar = require('chokidar');
 const mainBowerFiles = require('main-bower-files');
 const concat = require('gulp-concat');
+const rename = require('gulp-rename');
 
 const config = require('./includes/config.js');
 const utils = require('./includes/utilities.js');
@@ -32,6 +33,15 @@ function processCss() {
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(postcss([postcssFlexbugs, autoprefixer()]))
+    // Put a copy in snippets
+    .pipe(rename( (path) => {
+      path.extname = '.liquid';
+    }))
+    .pipe(gulp.dest(config.dist.snippets))
+    .pipe(rename( (path) => {
+      path.extname = '.css';
+    }))
+    // Write out to assets
     .pipe(sourcemaps.write('.'))
     .pipe(scssFilter.restore)
     .pipe(gulp.dest(config.dist.assets));
