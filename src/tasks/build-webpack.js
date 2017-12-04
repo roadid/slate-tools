@@ -43,6 +43,7 @@ function processWebpackJs(continueOnError) {
   gulpPipe.pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('dist/assets'));
 }
+
 gulp.task('build:webpack', () => {
   processWebpackJs(false);
 });
