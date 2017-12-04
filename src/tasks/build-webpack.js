@@ -10,11 +10,29 @@ const utils = require('./includes/utilities.js');
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
 
+const webpackConfigPath = `${config.themeRoot}/webpack.config.js`;
+const webpackConfig = require(webpackConfigPath);
+
+const entryFiles = [];
+
+if (webpackConfig.entry) {
+  for (const propertyName in webpackConfig.entry) {
+    if (Object.prototype.hasOwnProperty.call(webpackConfig.entry, propertyName)) {
+      const entries = webpackConfig.entry[propertyName];
+      for (let i = 0; i < entries.length; i++) {
+        if (entries[i].indexOf('babel-polyfill') < 0) {
+          entryFiles.push(entries[i]);
+        }
+      }
+    }
+  }
+}
 
 function processWebpackJs(continueOnError) {
+
   messages.logProcessFiles('build:webpack');
-  const webpackConfig = `${config.themeRoot}/webpack.config.js`;
-  let gulpPipe = gulp.src(config.src.webpack);
+
+  let gulpPipe = gulp.src(config.src.webpackOutputFiles);
 
   if (continueOnError) {
     gulpPipe = gulpPipe.pipe(plumber(utils.errorHandlerButContinue));
@@ -22,7 +40,7 @@ function processWebpackJs(continueOnError) {
     gulpPipe = gulpPipe.pipe(plumber(utils.errorHandler));
   }
   // gulpPipe.pipe(size({    showFiles: true,    pretty: true,  }))
-  return gulpPipe.pipe(webpackStream(require(webpackConfig), webpack))
+  gulpPipe.pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('dist/assets'));
 }
 gulp.task('build:webpack', () => {
@@ -32,13 +50,11 @@ gulp.task('build:webpack', () => {
 
 gulp.task('watch:webpack', () => {
 
-
-  chokidar.watch([config.src.webpack], {ignoreInitial: true})
+  chokidar.watch([config.src.webpackAllFiles], {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
-      processWebpackJs(true);
+      processWebpackJs(true, path);
     });
 
-  // processWebpackJs(true);
 });
 

@@ -36,11 +36,11 @@ function processCss() {
     .pipe(postcss([postcssFlexbugs, autoprefixer()]))
     // Put a copy of theme in snippets
     .pipe(themeFilter)
-    .pipe(rename( (path) => {
+    .pipe(rename((path) => {
       path.extname = '.liquid';
     }))
     .pipe(gulp.dest(config.dist.snippets))
-    .pipe(rename( (path) => {
+    .pipe(rename((path) => {
       path.extname = '.css';
     }))
     .pipe(themeFilter.restore)
