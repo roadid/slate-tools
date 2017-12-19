@@ -1,3 +1,7 @@
+# IMPORTANT
+
+This is still a work in process but due to a custom shopify product builder, I needed to use quite a bit of javascript and thus wanted to have webpack for the project. I added gulp task for webpack in a forked the slate tools here but the overview is that in our shopify theme project we added a webpack.config.js that is processed by a gulp task on any change in src/scripts_webpack/ in our theme project. It works greats for both slate watch and slate start. Let me know if the community would like a more detailed example of this.
+
 # Road ID Notes -  Testing Changes
 
 #Path to
