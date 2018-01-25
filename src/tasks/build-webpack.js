@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 
-const chokidar = require('chokidar');
+// const chokidar = require('chokidar');
 // const size = require('gulp-size');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
@@ -28,9 +28,10 @@ if (webpackConfig.entry) {
   }
 }
 
-function processWebpackJs(continueOnError) {
+function processWebpackJs(continueOnError, watch) {
 
-  messages.logProcessFiles('build:webpack');
+
+  messages.logProcessFiles(watch ? 'watch:webpack' : 'build:webpack');
 
   let gulpPipe = gulp.src(config.src.webpackOutputFiles);
 
@@ -40,22 +41,19 @@ function processWebpackJs(continueOnError) {
     gulpPipe = gulpPipe.pipe(plumber(utils.errorHandler));
   }
   // gulpPipe.pipe(size({    showFiles: true,    pretty: true,  }))
+
+  webpackConfig.watch = watch;
+
   gulpPipe.pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('dist/assets'));
 }
 
 gulp.task('build:webpack', () => {
-  processWebpackJs(false);
+  processWebpackJs(false, false);
 });
 
 
 gulp.task('watch:webpack', () => {
-
-  chokidar.watch([config.src.webpackAllFiles], {ignoreInitial: true})
-    .on('all', (event, path) => {
-      messages.logFileEvent(event, path);
-      processWebpackJs(true, path);
-    });
-
+  processWebpackJs(false, true);
 });
 
