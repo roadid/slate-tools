@@ -18,18 +18,22 @@ const utils = require('./includes/utilities.js');
 
 function processThemeJs() {
   messages.logProcessFiles('build:js');
-  return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
+  let gulpSettings = gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
     .pipe(sourcemaps.init())
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
-    .pipe(ngAnnotate())
-    .pipe(uglify({
+    .pipe(ngAnnotate());
+
+  // only minify and compress if product flag is set.
+  if (process.env.NODE_ENV === 'production') {
+    gulpSettings = gulpSettings.pipe(uglify({
       mangle: true,
       compress: true,
       preserveComments: 'license',
     }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(config.dist.assets));
+      .pipe(sourcemaps.write('.'));
+  }
+  return gulpSettings.pipe(gulp.dest(config.dist.assets));
 }
 
 function processVendorJs() {
